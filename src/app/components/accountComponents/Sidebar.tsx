@@ -1,46 +1,59 @@
 "use client";
 import React from "react";
-import axiosInstance from "../../../../utils/api/axiosInstance";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
+import { useRole } from "../../../../hooks/useRole";
+
+const navigationLinks = [
+  { href: "#details", label: "Dane osobowe", primary: true },
+  { href: "#address", label: "Metody płatności" },
+  { href: "#orders", label: "Zamówienia" },
+  { href: "#settings", label: "Ustawienia" },
+];
 
 const Sidebar: React.FC = () => {
   const router = useRouter();
-  const handleLogout = async () => {
-    try {
-      const response = await axiosInstance.post("/auth/logout");
-      if (response.status === 200) {
-        router.push("/auth/sign-in");
-      }
-    } catch (error) {
-      console.error("Błąd podczas wylogowywania", error);
-      return false;
+  const { isAdmin, handleLogout } = useRole();
+
+  const onLogout = async () => {
+    const success = await handleLogout();
+    if (success) {
+      router.push("/auth/sign-in");
     }
   };
 
   return (
     <aside className="bg-white p-6 md:col-span-1">
       <nav className="space-y-4">
-        <a
-          href="#details"
-          className="block text-blue-600 font-medium hover:underline"
-        >
-          Dane osobowe
-        </a>
-        <a href="#address" className="block text-gray-600 hover:text-blue-600">
-          Metody płatności
-        </a>
-        <a href="#orders" className="block text-gray-600 hover:text-blue-600">
-          Zamówienia
-        </a>
+        {navigationLinks.map(({ href, label, primary }) => (
+          <Link
+            key={href}
+            href={href}
+            className={`block ${
+              primary
+                ? "text-blue-600 font-medium hover:underline"
+                : "text-gray-600 hover:text-blue-600"
+            }`}
+          >
+            {label}
+          </Link>
+        ))}
+
+        {isAdmin && (
+          <Link
+            href="/admin"
+            className="block text-gray-600 hover:text-blue-600"
+          >
+            Admin
+          </Link>
+        )}
+
         <button
-          onClick={handleLogout}
+          onClick={onLogout}
           className="block text-gray-600 hover:text-blue-600"
         >
           Wyloguj
         </button>
-        <a href="#settings" className="block text-gray-600 hover:text-blue-600">
-          Ustawienia
-        </a>
       </nav>
     </aside>
   );

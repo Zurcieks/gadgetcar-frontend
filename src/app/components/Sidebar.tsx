@@ -11,17 +11,14 @@ import { CiLogout, CiMoneyBill } from "react-icons/ci";
 
 import { usePathname } from "next/navigation";
 import { MdOutlineDashboard } from "react-icons/md";
- 
 
-import axios from "axios";
-import axiosInstance from "../../../utils/api/axiosInstance";
 import { useRouter } from "next/navigation";
-import handleLogout from "../../../utils/api/apiHelpers";
+import { handleLogout } from "../api/apiHelpers";
+
 const Sidebar = () => {
   const [isSideBarOpen, setIsSideBarOpen] = useState(false);
   const router = useRouter();
   const pathname = usePathname();
-
 
   const links = [
     { href: "/", label: "Strona główna", icon: HomeIcon },
@@ -34,10 +31,15 @@ const Sidebar = () => {
   const toggleSideBar = () => {
     setIsSideBarOpen(!isSideBarOpen);
   };
+
   const Logout = async () => {
-    const isLoggedIn = await handleLogout();
-    if (isLoggedIn) {
-      router.push("/auth/sign-in");
+    const Log = await handleLogout();
+    try {
+      if (Log) {
+        router.push("/auth/sign-in");
+      }
+    } catch (error) {
+      console.log("Błąd podczas wylogowania", error);
     }
   };
 
@@ -51,7 +53,7 @@ const Sidebar = () => {
       </button>
 
       <div
-        className={`h-screen w-64 absolute bg-white border-r border-gray-200 flex flex-col  z-40 transform transition-transform duration-300 ${
+        className={`h-screen w-64 fixed left-0 top-0 bg-white border-r border-gray-200 flex flex-col z-40 transition-transform duration-300 ${
           isSideBarOpen ? "translate-x-0" : "-translate-x-full"
         } md:translate-x-0`}
       >
@@ -62,7 +64,7 @@ const Sidebar = () => {
           </Link>
         </div>
 
-        <nav className="flex-1 px-4 py-6">
+        <nav className="flex-1 px-4 py-6 absolute mt-20">
           <ul className="space-y-4">
             {links.map(({ href, label, icon: Icon }) => (
               <li key={href}>
@@ -82,7 +84,7 @@ const Sidebar = () => {
             <ul className="mt-4 space-y-2">
               <li>
                 <button
-                  onClick={handleLogout}
+                  onClick={Logout}
                   className="flex items-center text-gray-700 hover:text-indigo-600"
                 >
                   <CiLogout className="h-5 w-5 mr-3" />

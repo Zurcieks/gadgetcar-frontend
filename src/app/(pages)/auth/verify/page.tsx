@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
  
 import { useSearchParams } from 'next/navigation';
-import axiosInstance from "../../../../../utils/api/axiosInstance";
+import axiosInstance from "../../../api/axiosInstance";
 
 const ConfirmPage: React.FC = () => {
   const [status, setStatus] = useState<string | null>(null); 

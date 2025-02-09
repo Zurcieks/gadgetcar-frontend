@@ -1,4 +1,3 @@
- 
 import Navbar from "@/app/components/Navbar";
 
 export default function ConfirmLayout({
@@ -9,10 +8,15 @@ export default function ConfirmLayout({
   return (
     <div>
       <header>
-        <Navbar />
+        <Navbar
+          backgroundColor="bg-white"
+          borderColor="border-black"
+          textColor="text-black"
+        />
       </header>
 
       {children}
     </div>
   );
 }
+ 

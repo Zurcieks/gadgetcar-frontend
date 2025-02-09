@@ -9,7 +9,11 @@ export default function ConfirmLayout({
   return (
     <div>
       <header>
-        <Navbar />
+        <Navbar
+          backgroundColor="bg-white"
+          borderColor="border-black"
+          textColor="text-black"
+        />
       </header>
 
       {children}

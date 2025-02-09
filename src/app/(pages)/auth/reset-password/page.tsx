@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
-import axiosInstance from "../../../../../utils/api/axiosInstance";
-import { useRouter, useSearchParams } from "next/navigation"; // Usunięto 'useParams'
+import axiosInstance from "../../../api/axiosInstance";
+import { useRouter, useSearchParams } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -12,10 +12,10 @@ const Page = () => {
   const [error, setError] = useState<string | null>(null);
   const router = useRouter();
   const searchParams = useSearchParams();
-  const token = searchParams.get("token"); // Pobieramy token z query string
+  const token = searchParams.get("token");
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault(); // Wywołanie preventDefault()
+    e.preventDefault();
 
     setError(null);
 
@@ -30,21 +30,18 @@ const Page = () => {
         return;
       }
 
-      // Wysyłanie żądania z tokenem i nowym hasłem
       const response = await axiosInstance.post(`/auth/reset-password`, {
         token,
-        newPassword, // Używamy nowego hasła (backend oczekuje newPassword)
+        newPassword,
       });
 
-      // Zakładając, że backend wysyła komunikat
       if (response.data) {
         setMessage(
           "Hasło zostało zmienione. Za chwilę zostaniesz przekierowany do strony logowania."
         );
 
-        // Automatyczne przekierowanie po 3 sekundach
         setTimeout(() => {
-          router.push("/auth/sign-in"); // Przekierowanie na stronę logowania
+          router.push("/auth/sign-in");
         }, 3000);
       }
     } catch (error) {
