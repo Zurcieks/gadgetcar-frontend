@@ -2,7 +2,7 @@
 import React from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { useRole } from "../../../../hooks/useRole";
+import { useRole } from "../../../hooks/useRole";
 
 const navigationLinks = [
   { href: "#details", label: "Dane osobowe", primary: true },
@@ -18,12 +18,12 @@ const Sidebar: React.FC = () => {
   const onLogout = async () => {
     const success = await handleLogout();
     if (success) {
-      router.push("/auth/sign-in");
+      router.push("/autoryzacja/logowanie");
     }
   };
 
   return (
-    <aside className="bg-white p-6 md:col-span-1">
+    <aside className=" p-6 md:col-span-1">
       <nav className="space-y-4">
         {navigationLinks.map(({ href, label, primary }) => (
           <Link
@@ -32,7 +32,7 @@ const Sidebar: React.FC = () => {
             className={`block ${
               primary
                 ? "text-blue-600 font-medium hover:underline"
-                : "text-gray-600 hover:text-blue-600"
+                : "  hover:text-blue-600"
             }`}
           >
             {label}
@@ -42,7 +42,7 @@ const Sidebar: React.FC = () => {
         {isAdmin && (
           <Link
             href="/admin"
-            className="block text-gray-600 hover:text-blue-600"
+            className="block   hover:text-blue-600"
           >
             Admin
           </Link>
@@ -50,7 +50,7 @@ const Sidebar: React.FC = () => {
 
         <button
           onClick={onLogout}
-          className="block text-gray-600 hover:text-blue-600"
+          className="block  hover:text-blue-600"
         >
           Wyloguj
         </button>

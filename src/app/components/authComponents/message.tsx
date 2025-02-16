@@ -13,7 +13,7 @@ const Message: React.FC<MessageProps> = ({ message, type = "error" }) => {
   };
 
   return (
-    <div className={`mt-4 text-center text-lg ${styles[type]} px-4 py-2`}>
+    <div className={`mt-4 text-center text-md ${styles[type]} px-2`}>
       {message}
     </div>
   );

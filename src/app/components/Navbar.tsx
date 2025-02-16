@@ -10,13 +10,14 @@ import {
   UserIcon,
 } from "@heroicons/react/24/outline";
 import Link from "next/link";
+import { ModeToggle } from "./mode-toggle";
 
 const navigation = {
   pages: [
-    { name: "Produkty", href: "#" },
-    { name: "O nas", href: "#" },
-    { name: "Regulamin", href: "#" },
-    { name: "Kontakt", href: "#" },
+    { name: "Produkty", href: "/produkty" },
+    { name: "O nas", href: "/o-nas" },
+    { name: "Regulamin", href: "/regulamin" },
+    { name: "Kontakt", href: "/kontakt" },
   ],
 };
 
@@ -29,15 +30,15 @@ interface ExampleProps {
 
 export default function Example({
   backgroundColor = "bg-transparent", // Domyślny kolor tła
-  borderColor = "border-gray-900", // Domyślny kolor obramowania
+  borderColor = "", // Domyślny kolor obramowania
   logoSrc = "/logo.png", // Domyślny URL do loga
-  textColor = "text-white", // Domyślny kolor tekstu
+  textColor = "", // Domyślny kolor tekstu
 }: ExampleProps) {
   const [open, setOpen] = useState(false);
 
   return (
     <div
-      className={`absolute top-0 w-full ${backgroundColor} z-50  backdrop-blur-sm ${borderColor} h-20`}
+      className={`absolute top-0 w-full ${backgroundColor}   z-50  backdrop-blur-sm  h-20`}
     >
       <Dialog open={open} onClose={setOpen} className="relative z-50 lg:hidden">
         <DialogBackdrop
@@ -60,7 +61,7 @@ export default function Example({
               </button>
             </div>
 
-            <div className="space-y-8 border-t border-gray-200 z-50 px-4 py-6">
+            <div className="space-y-8  z-50 px-4 py-6">
               {navigation.pages.map((page) => (
                 <div key={page.name} className="flow-root">
                   <a
@@ -76,13 +77,13 @@ export default function Example({
         </div>
       </Dialog>
 
-      <header className={`z-50 mt-2`}>
-        <nav className="mx-auto w-auto mr-0 ml-0 lg:mr-24 lg:ml-24 px-4 sm:px-6 lg:px-7">
+      <header className={`z-50  ${borderColor} `}>
+        <nav className="mx-auto w-auto mr-0 ml-0 lg:mr-24 lg:ml-2 px-4 sm:px-6 lg:px-7">
           <div className="flex items-center justify-between h-16">
-            <div className="flex items-center space-x-4 mr-auto">
+            <div className="flex items-center space-x-4 mr-auto ">
               <button
                 type="button"
-                className={`md:hidden p-2 ${textColor} hover:text-gray-500`}
+                className={`lg:hidden p-2 ${textColor} `}
                 onClick={() => setOpen(true)}
               >
                 <span className="sr-only">Open menu</span>
@@ -99,12 +100,12 @@ export default function Example({
                 </Link>
               </div>
 
-              <div className="hidden md:flex gap-10 px-5">
+              <div className="hidden lg:flex gap-10 z-50 ">
                 {navigation.pages.map((page) => (
                   <Link
                     key={page.name}
                     href={page.href}
-                    className={`text-md font-semibold ${textColor} hover:text-gray-800`}
+                    className={`text-sm font-semibold ${textColor} hover:text-gray-800`}
                   >
                     {page.name}
                   </Link>
@@ -114,20 +115,18 @@ export default function Example({
 
             <div className="flex items-center space-x-6 ml-auto">
               <Link
-                href="/account"
+                href="/konto"
                 className={`${textColor} hover:text-gray-500`}
               >
-                <span className="sr-only">Account</span>
+                <span className="sr-only">Konto</span>
                 <UserIcon className="h-7 w-7" aria-hidden="true" />
               </Link>
+
               <Link href="#" className={`${textColor} hover:text-gray-500`}>
-                <span className="sr-only">Search</span>
-                <MagnifyingGlassIcon className="h-7 w-7" aria-hidden="true" />
-              </Link>
-              <Link href="#" className={`${textColor} hover:text-gray-500`}>
-                <span className="sr-only">Cart</span>
+                <span className="sr-only">Koszyk</span>
                 <ShoppingBagIcon className="h-7 w-7" aria-hidden="true" />
               </Link>
+              <ModeToggle />
             </div>
           </div>
         </nav>
@@ -135,4 +134,3 @@ export default function Example({
     </div>
   );
 }
-

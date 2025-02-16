@@ -31,7 +31,7 @@ const Hero = () => {
           nawigacją i połączeniami.
         </p>
         <Link
-          className=" flex  border-2 text-white px-4 py-3 bg-transparent rounded-md"
+          className=" flex  border-2 text-white border-white px-4 py-3 bg-transparent rounded-md"
           href="/sklep"
         >
           Przeglądaj

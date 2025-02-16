@@ -1,4 +1,4 @@
-import Sidebar from "@/app/components/Sidebar";
+import Sidebar from "@/app/components/adminComponents/Sidebar";
 
 export default function ConfirmLayout({
   children,

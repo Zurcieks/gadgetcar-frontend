@@ -3,18 +3,18 @@ import { parse } from "cookie";
 
 export function middleware(request: NextRequest) {
   const cookiesHeader = request.headers.get("cookie") || "";
-
+  
   const cookies = parse(cookiesHeader);
 
   const refreshToken = cookies["refresh-token"];
 
   if (!refreshToken) {
-    return NextResponse.redirect(new URL("/auth/sign-in", request.url));
+    return NextResponse.redirect(new URL("/autoryzacja/logowanie", request.url));
   }
 
   return NextResponse.next();
 }
 
 export const config = {
-  matcher: ["/account"],
+  matcher: ["/konto"],
 };

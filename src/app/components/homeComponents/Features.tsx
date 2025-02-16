@@ -10,51 +10,51 @@ const features = [
   {
     name: "Szybka wysyłka",
     description: "Dostawa w 24h",
-    icon: <Truck size={40} />,
+    icon: <Truck size={30} />,
   },
   {
     name: "Wsparcie 24/7",
     description: "Pomoc przez całą dobę",
-    icon: <Headset size={40} />,
+    icon: <Headset size={30} />,
   },
   {
-    name: "Zabezpieczone płatności",
-    description: "Twoje płatności są bezpieczne",
-    icon: <ShieldCheck size={40} />,
+    name: "Bezpieczeństwo",
+    description: "Zabezpieczone płatności",
+    icon: <ShieldCheck size={30} />,
   },
   {
     name: "30 dni na zwrot",
     description: "Masz 30 dni na zwrot",
-    icon: <RotateCcw size={40} />,
+    icon: <RotateCcw size={30} />,
   },
 ];
 
 const Features = () => {
   return (
-    <div className="bg-gray-950 text-white h-auto border-white">
-      <div className="container mx-auto px-2">
+    <div className="bg-gray-950 dark:bg-black text-white h-auto border-white">
+      <div className="container mx-auto ">
         <Swiper
           modules={[Autoplay]}
-          spaceBetween={20} // Odstęp pomiędzy slajdami
-          slidesPerView="auto" // Dostosowanie liczby slajdów widocznych na ekranie
-           // Przewijanie w kółko
+          spaceBetween={20}  
+          slidesPerView="auto"  
+    
           autoplay={{delay: 3000}}
           breakpoints={{
             640: {
-              slidesPerView: 2, // Na małych ekranach 2 slajdy
+              slidesPerView: 2, 
             },
             1024: {
-              slidesPerView: 4, // Na większych ekranach 4 slajdy
+              slidesPerView: 4,  
             },
           }}
         >
           {features.map((feature, index) => (
             <SwiperSlide key={index}>
-              <div className="flex items-center justify-center p-4  rounded-lg">
+              <div className="flex items-center justify-center p-4 rounded-lg">
                 <div className="mr-4">{feature.icon}</div>
                 <div>
-                  <h3 className="text-lg font-semibold">{feature.name}</h3>
-                  <p className="text-sm text-gray-400">{feature.description}</p>
+                  <h3 className=" text-md lg:text-lg  font-semibold">{feature.name}</h3>
+                  <p className="text-sm  text-gray-400">{feature.description}</p>
                 </div>
               </div>
             </SwiperSlide>
