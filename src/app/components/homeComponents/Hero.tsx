@@ -18,7 +18,7 @@ const Hero = () => {
         <h1 className="hidden md:block text-3xl text-center w-auto md:text-start md:text-5xl font-sans md:w-2/3  font-bold text-white">
           Popraw swój komfort za kierownicą z naszymi radiami dotykowymi
         </h1>
-        <h1 className=" md:hidden text-4xl  font-extrabold text-center    text-white">
+        <h1 className=" md:hidden text-4xl  font-bold text-center    text-white">
           Popraw swój komfort za kierownicą z naszymi radiami
         </h1>
         <p className=" hidden md:block text-xl w-full text-center md:text-start md:text-xl font-sans md:w-1/2 text-white">
@@ -26,7 +26,7 @@ const Hero = () => {
           multimediami, nawigacją i połączeniami. Styl i funkcjonalność w
           jednym.
         </p>
-        <p className="md:hidden text-xl w-auto text-center md:text-start md:text-xl font-sans md:w-1/2 text-white">
+        <p className="md:hidden text-xl  text-center   font-sans text-white">
           Ulepsz podróże dzięki radiu z dotykowym ekranem multimediami,
           nawigacją i połączeniami.
         </p>

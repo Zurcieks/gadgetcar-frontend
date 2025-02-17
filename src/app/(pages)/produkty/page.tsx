@@ -34,7 +34,7 @@ export default function ProductsPage() {
     setFilters((prev) => ({ ...prev, priceRange: { min, max } }));
   };
 
-  if (isLoading) return <div><LoadingSpinner/></div>;
+  if (isLoading) return ;
   if (error) return <div>Error: {error.message}</div>;
 
   return (

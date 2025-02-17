@@ -1,27 +1,13 @@
 "use client"
-import React, { useEffect, useState } from "react";
+import { VerifyAccount } from "@/hooks/authForm";
+import React from "react";
  
-import { useSearchParams } from 'next/navigation';
-import axiosInstance from "../../../../../api/axiosInstance";
  
 
 const ConfirmPage: React.FC = () => {
-  const [status, setStatus] = useState<string | null>(null); 
-  const searchParams = useSearchParams();
-  const token = searchParams.get('token');
-
-  useEffect(() => {
-    if (token) {
-      axiosInstance
-        .get(`/auth/verify`, { params: { token} })   
-        .then((response) => {
-          setStatus("Konto zostało pomyślnie potwierdzone. Możesz powrócić do strony logowania.");
-        })
-        .catch((error) => {
-          setStatus("Błąd weryfikacji konta. Użytkownik może być już potwierdzony.");
-        });
-    }
-  }, [token]);  
+  const {
+    status
+  } = VerifyAccount();
 
   return (
     <div className="h-screen flex items-center justify-center bg-white">

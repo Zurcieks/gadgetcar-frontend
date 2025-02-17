@@ -31,7 +31,7 @@ const features = [
 
 const Features = () => {
   return (
-    <div className="bg-gray-950 dark:bg-black text-white h-auto border-white">
+    <div className="bg-gray-950 text-white h-auto border-white">
       <div className="container mx-auto ">
         <Swiper
           modules={[Autoplay]}

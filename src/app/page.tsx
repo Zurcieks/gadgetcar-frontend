@@ -6,34 +6,36 @@ import Products from "./components/homeComponents/Products";
 import Footer from "./components/Footer";
 import Faq from "./components/Faq";
 
-const page = () => {
+const Page = () => {
   return (
     <div>
-      <nav>
-        <Navbar
-          backgroundColor="bg-transparent"
-          borderColor="border-none"
-          textColor="text-white"
-        />
-      </nav>
-      <header>
-        <Hero />
-      </header>
-      <section>
-        <Features />
-      </section>
-      <section>
-        <Products />
-      </section>
-      <hr/>
-      <section>
-        <Faq />
-      </section>
-      <footer>
-        <Footer />
-      </footer>
+      <>
+        <nav>
+          <Navbar
+            backgroundColor="bg-transparent"
+            borderColor="border-none"
+            textColor="text-white"
+          />
+        </nav>
+        <header>
+          <Hero />
+        </header>
+        <section>
+          <Features />
+        </section>
+        <section>
+          <Products />
+        </section>
+        <hr />
+        <section>
+          <Faq />
+        </section>
+        <footer>
+          <Footer />
+        </footer>
+      </>
     </div>
   );
 };
 
-export default page;
+export default Page;

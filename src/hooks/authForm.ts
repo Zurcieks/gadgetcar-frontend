@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import {
   LoginFormData,
@@ -279,5 +279,29 @@ export const ResetPassword = () => {
     useSearchParams,
     token,
     handleSubmit
+  }
+}
+
+export const VerifyAccount = () => {
+  const [status, setStatus] = useState<string | null>(null); 
+  const searchParams = useSearchParams();
+  const token = searchParams.get('token');
+  
+  useEffect(() => {
+    if (token) {
+      axiosInstance
+        .get(`/auth/verify`, { params: { token} })   
+        .then((response) => {
+          setStatus("Konto zostało pomyślnie potwierdzone. Możesz powrócić do strony logowania.");
+        })
+        .catch((error) => {
+          setStatus("Błąd weryfikacji konta. Użytkownik może być już potwierdzony.");
+        });
+    }
+  }, [token]);  
+  return {
+    status,
+    searchParams,
+    token
   }
 }

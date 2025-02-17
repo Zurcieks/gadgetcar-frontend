@@ -43,30 +43,30 @@ export default function Example({
       <Dialog open={open} onClose={setOpen} className="relative z-50 lg:hidden">
         <DialogBackdrop
           transition
-          className="fixed inset-0 bg-black/25 transition-opacity duration-300 ease-linear data-closed:opacity-0"
+          className="fixed inset-0  transition-opacity duration-300 ease-linear data-closed:opacity-0"
         />
 
         <div className="fixed inset-0 z-50 flex">
           <DialogPanel
             transition
-            className="relative flex w-full max-w-xs transform flex-col overflow-y-auto bg-white pb-12 shadow-xl transition duration-300 ease-in-out data-closed:-translate-x-full"
+            className="relative flex w-full max-w-xs transform flex-col overflow-y-auto bg-black  pb-12 shadow-xl transition duration-300 ease-in-out data-closed:-translate-x-full"
           >
             <div className="flex px-4 pt-5 pb-2 z-50">
               <button
                 type="button"
                 onClick={() => setOpen(false)}
-                className={`relative -m-2 inline-flex items-center justify-center rounded-md p-2 ${textColor}`}
+                className={`relative -m-2 inline-flex items-center justify-center rounded-md p-2  ${textColor} `}
               >
                 <XMarkIcon aria-hidden="true" className="size-7 z-50" />
               </button>
             </div>
 
-            <div className="space-y-8  z-50 px-4 py-6">
+            <div className="space-y-8  z-50 px-4 py-6 hover:text-white">
               {navigation.pages.map((page) => (
                 <div key={page.name} className="flow-root">
                   <a
                     href={page.href}
-                    className={`-m-2 block p-2 font-medium ${textColor}`}
+                    className={`-m-2 block p-2 font-medium hover:text-gray-900 ${textColor}`}
                   >
                     {page.name}
                   </a>
