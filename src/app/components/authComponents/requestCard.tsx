@@ -1,4 +1,4 @@
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/app/components/ui/tabs";
+import { Tabs, TabsContent } from "@/app/components/ui/tabs";
 import {
   Card,
   CardContent,

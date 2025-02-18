@@ -72,12 +72,12 @@ export default function Navbar({
             <div className="space-y-8 z-40 px-4 py-6 hover:text-white">
               {navigation.pages.map((page) => (
                 <div key={page.name} className="flow-root">
-                  <a
+                  <Link
                     href={page.href}
                     className={`-m-2 block p-2 font-medium hover:text-gray-900 ${textColor}`}
                   >
                     {page.name}
-                  </a>
+                  </Link>
                 </div>
               ))}
             </div>

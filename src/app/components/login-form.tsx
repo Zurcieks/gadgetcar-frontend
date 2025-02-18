@@ -5,7 +5,6 @@ import { Input } from "@/app/components/ui/input";
 import { Label } from "@/app/components/ui/label";
 import { useLoginForm } from "@/hooks/useAuthForm";
 import Message from "@/app/components/authComponents/message";
-import { Checkbox } from "./ui/checkbox";
 
 export function LoginForm({
   className,

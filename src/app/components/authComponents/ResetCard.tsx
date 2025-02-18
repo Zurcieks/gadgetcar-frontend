@@ -9,7 +9,7 @@ import {
 } from "@/app/components/ui/card";
 import { Input } from "@/app/components/ui/input";
 import { Label } from "@/app/components/ui/label";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/app/components/ui/tabs";
+import { Tabs, TabsContent } from "@/app/components/ui/tabs";
 import { useResetPassword } from "@/hooks/useAuthForm";
 
 export function ResetCard() {
@@ -19,9 +19,6 @@ export function ResetCard() {
     setNewPassword,
     confirmPassword,
     setConfirmPassword,
-    error,
-    setError,
-    message,
   } = useResetPassword();
 
   return (

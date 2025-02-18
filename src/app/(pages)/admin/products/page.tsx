@@ -1,9 +1,7 @@
 "use client";
 
 import ShowProducts from "@/app/components/adminComponents/ShowProducts";
-
-import { useRouter } from "next/navigation";
-import React, { useState } from "react";
+import React from "react";
 import { withAdminProtection } from "../../../../../hoc/withAdminAuth";
 
 const add = () => {

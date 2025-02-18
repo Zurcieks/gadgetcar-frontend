@@ -16,13 +16,13 @@ interface CartProps {
 }
 
 export default function Cart({ open, setOpen }: CartProps) {
-  const { data: cart, isLoading } = useGetCartQuery();
+  const { data: cart} = useGetCartQuery();
   const [removeItem] = useRemoveItemMutation();
  
 
   const handleRemoveItem = async (productId: string) => {
     try {
-      const result = await removeItem({ productId }).unwrap();
+     await removeItem({ productId }).unwrap();
     } catch (error) {
       console.error("Błąd podczas usuwania", error);
     }

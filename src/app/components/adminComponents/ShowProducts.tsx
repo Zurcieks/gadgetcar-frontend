@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axiosInstance from "../../../../api/axiosInstance";
 import Link from "next/link";
-
+import Image from "next/image";
 interface Product {
   _id: string;
   name: string;
@@ -161,7 +161,7 @@ const ShowProducts: React.FC = () => {
                 </td>
                 <td className="p-3">
                   <Link href={`/produkty/${product._id}`}>
-                    <img
+                    <Image
                       src={
                         product.images?.[0]
                           ? `http://localhost:5000/${product.images[0]}`
@@ -169,6 +169,8 @@ const ShowProducts: React.FC = () => {
                       }
                       alt={product.name}
                       className="w-10 h-10 object-cover rounded-md inline-block mr-2"
+                      width={100}
+                      height={100}
                     />
                     {product.name}
                   </Link>

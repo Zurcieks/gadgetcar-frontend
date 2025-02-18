@@ -8,10 +8,9 @@ import {
 import Link from "next/link";
 import React, { useState } from "react";
 import { CiLogout, CiMoneyBill } from "react-icons/ci";
-
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { MdOutlineDashboard } from "react-icons/md";
-
 import { useRouter } from "next/navigation";
 import { handleLogout } from "../../../../api/apiHelpers";
 
@@ -60,7 +59,7 @@ const Sidebar = () => {
         <div className="flex items-center justify-center h-16 border-b border-gray-200">
           <Link href="/">
             <span className="sr-only">Your Company</span>
-            <img alt="" src="/logo.png" className="h-40 w-40" />
+            <Image alt="Logo" src="/logo.png" className="h-40 w-40" width={200} height={200}  />
           </Link>
         </div>
 

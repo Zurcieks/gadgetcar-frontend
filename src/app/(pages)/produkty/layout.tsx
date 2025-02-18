@@ -1,4 +1,4 @@
-import Sidebar from "@/app/components/accountComponents/Sidebar";
+
 import Footer from "@/app/components/Footer";
 import Navbar from "@/app/components/Navbar";
 

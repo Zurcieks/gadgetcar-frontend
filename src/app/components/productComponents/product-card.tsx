@@ -24,7 +24,7 @@ interface ProductCardProps {
   product: Product;
 }
 export default function ProductCard({ product }: ProductCardProps) {
-  const [quantity, setQuantity] = useState(1);
+  const quantity = 1;
   const dispatch = useDispatch(); 
   const [addItemMutation] = useAddItemMutation(); 
   

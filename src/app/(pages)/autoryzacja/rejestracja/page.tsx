@@ -1,9 +1,6 @@
 import { RegisterForm } from "@/app/components/register-form";
 import Link from "next/link";
-
- 
-
- 
+import Image from "next/image";
 export default function LoginPage() {
   return (
     <div className="grid min-h-svh lg:grid-cols-2">
@@ -23,10 +20,11 @@ export default function LoginPage() {
         </div>
       </div>
       <div className="relative hidden bg-muted lg:block bg-white">
-        <img
+        <Image
           src="/radio.jpeg"
           alt="Image"
-          className="absolute inset-0 h-full w-full object-cover  dark:grayscale"
+          className="absolute inset-0 h-full w-full object-cover dark:brightness-[0.7] dark:grayscale"
+          fill
         />
       </div>
     </div>

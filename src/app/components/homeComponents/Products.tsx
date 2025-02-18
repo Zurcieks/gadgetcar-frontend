@@ -1,12 +1,13 @@
 "use client"
 import { useProducts } from "@/hooks/useProduct";
 import Link from "next/link";
-
+import Image from "next/image";
+import React from "react";
  
-export default function HomeProducts() {
+ const HomeProducts: React.FC = () => {
   const { products } = useProducts();
   return (
-    <div className="">
+    <div>
       <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
         <h2 className="text-3xl text-center font-sans font-bold tracking-tight">
           Poznaj nasze najciekawsze propozycje
@@ -15,12 +16,15 @@ export default function HomeProducts() {
         <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
           {products.slice(0, 4).map((product) => (
             <div key={product._id} className="group relative">
-              <img
+              <Image
+              alt="Produkty"
          
                 src={product.images?.[0]
                   ? `http://localhost:5000/${product.images[0]}`
                   : ""}
                 className="aspect-square w-full rounded-md bg-gray-200 object-cover group-hover:opacity-75 lg:aspect-auto lg:h-80"
+                width={500}
+                height={500}
               />
               <div className="mt-4 flex justify-between">
                 <div>
@@ -41,5 +45,7 @@ export default function HomeProducts() {
         </div>
       </div>
     </div>
-  );0
+  );
 }
+
+export default HomeProducts
