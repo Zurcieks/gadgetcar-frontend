@@ -1,6 +1,6 @@
 "use client"
 import { useVerifyAccount } from "@/hooks/useAuthForm";
-import React from "react";
+import React, { Suspense } from "react";
  
  
 
@@ -10,6 +10,7 @@ const ConfirmPage: React.FC = () => {
   } = useVerifyAccount();
 
   return (
+    <Suspense fallback={<div>Loading...</div>}>
     <div className="h-screen flex items-center justify-center bg-white">
       <div className="max-w-lg text-center p-6">
         {status ? (
@@ -19,6 +20,7 @@ const ConfirmPage: React.FC = () => {
         )}
       </div>
     </div>
+    </Suspense>
   );
 };
 
