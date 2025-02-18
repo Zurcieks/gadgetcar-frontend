@@ -5,6 +5,7 @@ import { UpdateItemDto } from './dto/UpdateItemDto';
 import { RemoveItemDto } from './dto/RemoveItemDto';
 import axios from 'axios';
 import { Cart } from '../../types/cart.types';
+import { addItem, clearCart, removeItem, setCartItems } from './cartSlice';
 
 interface AxiosQueryArgs {
   url: string;
@@ -46,49 +47,82 @@ const axiosBaseQuery =
 
  
   export const cartApi = createApi({
-    reducerPath: 'cartApi',
-    baseQuery: axiosBaseQuery({ baseUrl: 'http://localhost:5000/cart'}),
-    tagTypes: ['Cart'],
+    reducerPath: "cartApi",
+    baseQuery: axiosBaseQuery({ baseUrl: "http://localhost:5000/cart" }),
+    tagTypes: ["Cart"],
     endpoints: (builder) => ({
       getCart: builder.query<Cart, void>({
         query: () => ({
-          url: '',  
-          method: 'GET',
+          url: "",
+          method: "GET",
         }),
-        providesTags: ['Cart']
+        providesTags: ["Cart"],
+        async onQueryStarted(_, { dispatch, queryFulfilled }) {
+          try {
+            const { data } = await queryFulfilled;
+            dispatch(setCartItems(data.items)); // Aktualizuj store po pobraniu
+          } catch (error) {
+            console.error("Błąd pobierania koszyka:", error);
+          }
+        },
       }),
       addItem: builder.mutation<Cart, AddItemDto>({
         query: (item) => ({
-          url: 'add',
-          method: 'POST',
+          url: "add",
+          method: "POST",
           body: item,
         }),
-        invalidatesTags: ['Cart']
+        invalidatesTags: ["Cart"],
+        async onQueryStarted(item, { dispatch, queryFulfilled }) {
+          try {
+            dispatch(addItem({
+              ...item, images: [], description: "", availability: "dostępny", category: "Akcesoria",
+              name: '',
+              price: 0
+            }));
+            await queryFulfilled;
+          } catch (error) {
+            console.error("Błąd dodawania produktu:", error);
+          }
+        },
       }),
-      updateItem: builder.mutation<Cart, UpdateItemDto>({
-        query: (item) => ({
-          url: `update/${item.productId}`,
-          method: 'PUT',
-          body: item,
-        }),
-        invalidatesTags: ['Cart']
-      }),
+    
       removeItem: builder.mutation<void, RemoveItemDto>({
         query: (item) => ({
           url: `remove/${item.productId}`,
-          method: 'DELETE',
+          method: "DELETE",
         }),
-        invalidatesTags: ['Cart']
+        invalidatesTags: ["Cart"],
+        async onQueryStarted(item, { dispatch, queryFulfilled }) {
+          try {
+            dispatch(removeItem(item.productId));
+            await queryFulfilled;
+          } catch (error) {
+            console.error("Błąd usuwania produktu:", error);
+          }
+        },
       }),
       clearCart: builder.mutation<void, void>({
         query: () => ({
-          url: 'clear',
-          method: 'DELETE',
+          url: "clear",
+          method: "DELETE",
         }),
-        invalidatesTags: ['Cart']
+        invalidatesTags: ["Cart"],
+        async onQueryStarted(_, { dispatch, queryFulfilled }) {
+          try {
+            dispatch(clearCart());
+            await queryFulfilled;
+          } catch (error) {
+            console.error("Błąd czyszczenia koszyka:", error);
+          }
+        },
       }),
     }),
   });
-
-// Eksportowanie hooków do użycia w komponentach
-export const { useGetCartQuery, useAddItemMutation, useUpdateItemMutation, useRemoveItemMutation, useClearCartMutation } = cartApi;
+  
+  export const {
+    useGetCartQuery,
+    useAddItemMutation,
+    useRemoveItemMutation,
+    useClearCartMutation,
+  } = cartApi;

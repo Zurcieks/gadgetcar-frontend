@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { cartApi } from './cartApi';
 
 export interface CartItem {
   productId: string;
@@ -48,6 +49,13 @@ const cartSlice = createSlice({
       state.items = [];
     },
   },
+  extraReducers: (builder) => {
+    builder.addMatcher(cartApi.endpoints.getCart.matchFulfilled,
+      (state, {payload}) => {
+        state.items = payload.items;
+      }
+    )
+  }
 });
 
 export const { setCartItems, addItem, updateItem, removeItem, clearCart } = cartSlice.actions;

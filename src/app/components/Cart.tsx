@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction, useEffect } from "react";
 import {
   Dialog,
   DialogBackdrop,
@@ -9,6 +9,9 @@ import { XMarkIcon } from "@heroicons/react/24/outline";
 import {useGetCartQuery, useRemoveItemMutation } from "../../redux/cartApi";
 import Link from "next/link";
 import Image from "next/image";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "@/redux/store";
+import { setCartItems } from "@/redux/cartSlice";
  
 interface CartProps {
   open: boolean;
@@ -16,9 +19,16 @@ interface CartProps {
 }
 
 export default function Cart({ open, setOpen }: CartProps) {
-  const { data: cart} = useGetCartQuery();
+  const dispatch = useDispatch();
+  const cart = useSelector((state: RootState) => state.cart.items);
+  const { data} = useGetCartQuery();
   const [removeItem] = useRemoveItemMutation();
  
+  useEffect(() => {
+    if (data) {
+      dispatch(setCartItems(data.items));
+    }
+  }, [data, dispatch]);
 
   const handleRemoveItem = async (productId: string) => {
     try {
@@ -68,14 +78,14 @@ export default function Cart({ open, setOpen }: CartProps) {
                         role="list"
                         className="-my-6 divide-y divide-gray-200"
                       >
-                        {cart?.items.length === 0 ? (
+                        {cart?.length === 0 ? (
                           <li className="py-6">
                             <div className="text-center  text-gray-500">
                               Twój koszyk jest pusty
                             </div>
                           </li>
                         ) : (
-                          cart?.items.map((item) => (
+                          cart?.map((item) => (
                             <li key={item.productId} className="flex py-6">
                               <div className="size-24 shrink-0 overflow-hidden rounded-md border border-gray-200">
                               <Image
@@ -122,11 +132,11 @@ export default function Cart({ open, setOpen }: CartProps) {
                   </div>
                 </div>
 
-                {cart && cart.items && cart.items.length > 0 && (
+                {cart && cart && cart.length > 0 && (
                   <div className="border-t border-gray-200 px-4 py-6 sm:px-6">
                     <div className="flex justify-between text-base font-medium text-gray-900">
                       <p>Kwota</p>
-                      <p>{cart?.totalPrice} zł</p>
+                      <p>{data?.totalPrice} zł</p>
                     </div>
 
                     <div className="mt-6">

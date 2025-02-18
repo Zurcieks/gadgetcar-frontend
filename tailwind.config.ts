@@ -43,7 +43,7 @@ export default {
   			},
   			success: {
   				DEFAULT: 'hsl(120, 100%, 25%)',
-  				foreground: 'hsl(120, 100%, 95%)'
+  				foreground: 'hsl(310, 0%, 100%)'
   			},
   			border: 'hsl(var(--border))',
   			input: 'hsl(var(--input))',
