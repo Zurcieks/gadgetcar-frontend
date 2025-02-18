@@ -164,7 +164,7 @@ const ShowProducts: React.FC = () => {
                     <img
                       src={
                         product.images?.[0]
-                          ? `http://localhost:4000/${product.images[0]}`
+                          ? `http://localhost:5000/${product.images[0]}`
                           : ""
                       }
                       alt={product.name}

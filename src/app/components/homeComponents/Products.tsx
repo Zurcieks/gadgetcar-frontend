@@ -1,5 +1,5 @@
 "use client"
-import { getProducts } from "@/hooks/getProduct";
+import { getProducts } from "@/hooks/useProduct";
 import Link from "next/link";
 
  

@@ -5,11 +5,12 @@ import { StarIcon } from "@heroicons/react/20/solid";
 import { useParams } from "next/navigation";
 import Image from "next/image";
 
-import { useProduct } from "../../../../hooks/useProduct";
+ 
 import { LoadingSpinner } from "@/app/components/LoadingSpinner";
 import { ProductBreadcrumb } from "@/app/components/productComponents/productBreadcrumb";
 import { ProductInfo } from "@/app/components/productComponents/ProductInfo";
 import { ProductGallery } from "@/app/components/productComponents/ProductGallery";
+import { getProductById } from "@/hooks/useProduct";
 
 const REVIEWS = {
   href: "#",
@@ -19,7 +20,7 @@ const REVIEWS = {
 
 export default function ProductDetail() {
   const { id } = useParams();
-  const { product, isLoading, error } = useProduct(id as string);
+  const { product, isLoading, error } = getProductById(id as string);
 
   if (isLoading) return <LoadingSpinner />;
   if (error) return <div>Error loading product</div>;

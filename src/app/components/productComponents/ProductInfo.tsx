@@ -1,8 +1,11 @@
 import { Link, StarIcon } from "lucide-react";
 import { Product } from "../../../../types/product.types";
 import { useState } from "react";
-import { CartItem } from "../../../../redux/cartSlice";
-import { useAddItemMutation } from "../../../../redux/cartApi";
+import { CartItem } from "../../../redux/cartSlice";
+import { useAddItemMutation } from "../../../redux/cartApi";
+import { useDispatch } from "react-redux";
+import { addItem } from "../../../redux/cartSlice"; // Importuj akcję Redux
+import { toast } from "@/hooks/use-toast";
 
 interface ProductInfoProps {
   product: Product;
@@ -15,10 +18,10 @@ interface ProductInfoProps {
 
 export function ProductInfo({ product, reviews }: ProductInfoProps) {
   const [quantity, setQuantity] = useState(1);
-  const [addItem] = useAddItemMutation();  // Hook do dodawania przedmiotu do koszyka
+  const dispatch = useDispatch(); // Dodaj dispatch do obsługi Redux
+  const [addItemMutation] = useAddItemMutation(); // Hook do dodawania przedmiotu do koszyka
 
-  // Funkcja do obsługi dodawania do koszyka
-  const handleAddToCart = () => {
+  const handleAddToCart = async () => {
     const cartItem: CartItem = {
       productId: product._id,
       name: product.name,
@@ -30,23 +33,25 @@ export function ProductInfo({ product, reviews }: ProductInfoProps) {
       category: product.category,
     };
 
-    // Wywołanie mutacji do dodania produktu
-    addItem(cartItem)
-      .unwrap()
-      .then(() => {
-        console.log("Produkt został dodany do koszyka");
-      })
-      .catch((err: string) => {
-        console.error("Błąd podczas dodawania produktu do koszyka:", err);
+    try {
+      await addItemMutation(cartItem).unwrap();
+      dispatch(addItem(cartItem));
+      toast({
+        variant: "success",
+        title: "Sukces!",
+        description: "Przedmiot został dodany do koszyka.",
       });
+    } catch (error) {
+      console.error("Error adding item to cart:", error);
+    }
+
+ 
   };
-  
+
   return (
     <div className="flex flex-col gap-6">
       <div>
-        <h1 className="text-3xl font-bold tracking-tight ">
-          {product.name}
-        </h1>
+        <h1 className="text-3xl font-bold tracking-tight ">{product.name}</h1>
         <p className="mt-3 text-3xl tracking-tight ">
           {new Intl.NumberFormat("pl-PL", {
             style: "currency",
@@ -90,7 +95,7 @@ export function ProductInfo({ product, reviews }: ProductInfoProps) {
         </div>
 
         <button
-        onClick={handleAddToCart}
+          onClick={handleAddToCart}
           type="button"
           className="w-1/2 rounded-md bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
         >
@@ -101,9 +106,7 @@ export function ProductInfo({ product, reviews }: ProductInfoProps) {
       <div className="mt-8 border-t border-gray-200 pt-8">
         <div className="space-y-6">
           <div>
-            <h3 className="text-sm font-medium">
-              Szczegóły produktu
-            </h3>
+            <h3 className="text-sm font-medium">Szczegóły produktu</h3>
             <div className="mt-4 space-y-4">
               <p className="text-sm ">{product.description}</p>
             </div>

@@ -1,27 +1,23 @@
 "use client";
 import React, { useState } from "react";
-import { getProducts } from "@/hooks/getProduct";
+import { getProducts } from "@/hooks/useProduct";
 import { useProductFilters } from "@/hooks/useProductFilters";
 import ProductFilter from "@/app/components/productComponents/products-filter";
 import ProductCard from "@/app/components/productComponents/product-card";
 import Link from "next/link";
-import { LoadingSpinner } from "@/app/components/LoadingSpinner";
-
+ 
 export default function ProductsPage() {
-  // Fetch products using custom hook
+ 
   const { products, isLoading, error } = getProducts();
-
-  // State for filter values
+ 
   const [filters, setFilters] = useState({
     searchQuery: "",
     category: "",
     priceRange: { min: 0, max: 1000 },
   });
 
-  // Custom hook for filtering products
+ 
   const filteredProducts = useProductFilters(products, filters);
-
-  // Handler functions for filter updates
   const handleSearchChange = (value: string) => {
     setFilters((prev) => ({ ...prev, searchQuery: value }));
   };

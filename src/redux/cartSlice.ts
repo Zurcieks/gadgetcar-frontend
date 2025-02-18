@@ -11,6 +11,7 @@ export interface CartItem {
   category: "Akcesoria" | "Radia";
 }
 
+
 interface CartState {
   items: CartItem[];
 }

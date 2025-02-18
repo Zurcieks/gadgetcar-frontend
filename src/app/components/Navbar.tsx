@@ -11,7 +11,7 @@ import {
 import Link from "next/link";
 import { ModeToggle } from "./mode-toggle";
 import Cart from "./Cart";
-import { useGetCartQuery } from "../../../redux/cartApi";
+import { useGetCartQuery } from "../../redux/cartApi";
 
 const navigation = {
   pages: [
@@ -29,7 +29,7 @@ interface ExampleProps {
   textColor?: string;
 }
 
-export default function Example({
+export default function Navbar({
   backgroundColor = "bg-transparent",
   borderColor = "",
   logoSrc = "/logo.png",
@@ -38,13 +38,13 @@ export default function Example({
   const [open, setOpen] = useState(false);
   const [cartOpen, setCartOpen] = useState(false);
 
-  // Hook do pobierania koszyka
-  const { data: cart } = useGetCartQuery();
-
-  // Funkcja do obliczania liczby produktów w koszyku
+  const { data: cart } = useGetCartQuery();  
+  const cartItems = cart?.items ?? [];  
+  
   const getCartItemCount = () => {
-    return cart?.reduce((total, item) => total + item.quantity, 0) || 0;
+    return cartItems.reduce((total, item) => total + (item.quantity || 0), 0);
   };
+  
 
   return (
     <div
@@ -139,12 +139,12 @@ export default function Example({
 
                 {/* Zawsze wyświetl liczbę produktów w koszyku, nawet jeśli wynosi 0 */}
                 <span className="absolute top-1 left-7 rounded-full bg-white-500 text-xs w-5 h-5 flex items-center justify-center">
-                  {getCartItemCount() > 0 ? getCartItemCount() : 0}
+                {getCartItemCount()}
                 </span>
               </button>
               <ModeToggle />
 
-              <Cart open={cartOpen} setOpen={setCartOpen} />
+              <Cart open={cartOpen} setOpen={setCartOpen}   />
             </div>
           </div>
         </nav>
