@@ -9,7 +9,7 @@ export default function LoginPage() {
         <div className="flex justify-center gap-2 md:justify-start">
           <Link href="/" className="flex items-center gap-2 font-medium">
             <div className="flex h-8 w-8 items-center justify-center rounded-md bg-primary text-primary-foreground">
-              <img src="icon.png" className="text-white"/>
+              <Image alt="logo" src="icon.png" height={40} width={40} className="text-white"/>
             </div>
             GadgetCar
           </Link>

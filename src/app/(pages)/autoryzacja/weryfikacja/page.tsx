@@ -1,3 +1,4 @@
+/* eslint-disable */
 'use client'
 
 import React, { useEffect, useState } from "react";
@@ -16,7 +17,7 @@ const ConfirmPage: React.FC = () => {
         .get(`/auth/verify`, { params: { token} })   
         .then((response) => {
           setStatus("Konto zostało pomyślnie potwierdzone. Możesz powrócić do strony logowania.");
-        })
+        })  
         .catch((error) => {
           setStatus("Błąd weryfikacji konta. Użytkownik może być już potwierdzony.");
         });
