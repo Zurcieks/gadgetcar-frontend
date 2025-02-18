@@ -11,7 +11,7 @@ interface Product {
   stock_quantity: number;
   category: "Akcesoria" | "Radia";
 }
- 
+
 const ShowProducts: React.FC = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [selectedProducts, setSelectedProducts] = useState<string[]>([]);
@@ -82,7 +82,7 @@ const ShowProducts: React.FC = () => {
 
   return (
     <div className="h-screen w-full max-w-6xl p-8">
-        <div className="flex justify-end space-x-2">
+      <div className="flex justify-end space-x-2">
         <Link
           href="/admin/products/add"
           className="px-4 py-2 border-2 border-black bg-gray-900 text-white rounded-md"
@@ -90,7 +90,7 @@ const ShowProducts: React.FC = () => {
           Dodaj produkt
         </Link>
         <button
-          onClick={() => handleDeleteSelected()} 
+          onClick={() => handleDeleteSelected()}
           className="px-4 py-2 bg-red-600 text-white rounded-md"
         >
           Usuń wybrane
@@ -160,11 +160,11 @@ const ShowProducts: React.FC = () => {
                   />
                 </td>
                 <td className="p-3">
-                  <Link href={`/product/${product._id}`}>
+                  <Link href={`/produkty/${product._id}`}>
                     <img
                       src={
                         product.images?.[0]
-                          ? `http://localhost:5000/${product.images[0]}`
+                          ? `http://localhost:4000/${product.images[0]}`
                           : ""
                       }
                       alt={product.name}

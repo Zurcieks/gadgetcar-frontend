@@ -4,13 +4,14 @@ import { useState } from "react";
 import { Dialog, DialogBackdrop, DialogPanel } from "@headlessui/react";
 import {
   Bars3Icon,
-  MagnifyingGlassIcon,
   ShoppingBagIcon,
   XMarkIcon,
   UserIcon,
 } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import { ModeToggle } from "./mode-toggle";
+import Cart from "./Cart";
+import { useGetCartQuery } from "../../../redux/cartApi";
 
 const navigation = {
   pages: [
@@ -22,46 +23,53 @@ const navigation = {
 };
 
 interface ExampleProps {
-  backgroundColor?: string; // Opcjonalny kolor tła
-  borderColor?: string; // Opcjonalny kolor obramowania
-  logoSrc?: string; // Dynamiczny URL do loga
-  textColor?: string; // Opcjonalny kolor tekstu
+  backgroundColor?: string;
+  borderColor?: string;
+  logoSrc?: string;
+  textColor?: string;
 }
 
 export default function Example({
-  backgroundColor = "bg-transparent", // Domyślny kolor tła
-  borderColor = "", // Domyślny kolor obramowania
-  logoSrc = "/logo.png", // Domyślny URL do loga
-  textColor = "", // Domyślny kolor tekstu
+  backgroundColor = "bg-transparent",
+  borderColor = "",
+  logoSrc = "/logo.png",
+  textColor = "",
 }: ExampleProps) {
   const [open, setOpen] = useState(false);
+  const [cartOpen, setCartOpen] = useState(false);
+
+  // Hook do pobierania koszyka
+  const { data: cart } = useGetCartQuery();
+
+  // Funkcja do obliczania liczby produktów w koszyku
+  const getCartItemCount = () => {
+    return cart?.reduce((total, item) => total + item.quantity, 0) || 0;
+  };
 
   return (
     <div
-      className={`absolute top-0 w-full ${backgroundColor}   z-50  backdrop-blur-sm  h-20`}
+      className={`absolute top-0 w-full ${backgroundColor} z-40 backdrop-blur-sm h-20`}
     >
-      <Dialog open={open} onClose={setOpen} className="relative z-50 lg:hidden">
+      <Dialog open={open} onClose={setOpen} className="relative z-40 lg:hidden">
         <DialogBackdrop
           transition
-          className="fixed inset-0  transition-opacity duration-300 ease-linear data-closed:opacity-0"
+          className="fixed inset-0 transition-opacity duration-300 ease-linear data-closed:opacity-0"
         />
-
-        <div className="fixed inset-0 z-50 flex">
+        <div className="fixed inset-0 z-40 flex">
           <DialogPanel
             transition
-            className="relative flex w-full max-w-xs transform flex-col overflow-y-auto bg-black  pb-12 shadow-xl transition duration-300 ease-in-out data-closed:-translate-x-full"
+            className="relative flex w-full max-w-xs transform flex-col overflow-y-auto bg-black pb-12 shadow-xl transition duration-300 ease-in-out data-closed:-translate-x-full"
           >
-            <div className="flex px-4 pt-5 pb-2 z-50">
+            <div className="flex px-4 pt-5 pb-2 z-40">
               <button
                 type="button"
                 onClick={() => setOpen(false)}
-                className={`relative -m-2 inline-flex items-center justify-center rounded-md p-2  ${textColor} `}
+                className={`relative -m-2 inline-flex items-center justify-center rounded-md p-2 ${textColor} `}
               >
-                <XMarkIcon aria-hidden="true" className="size-7 z-50" />
+                <XMarkIcon aria-hidden="true" className="size-7 z-40" />
               </button>
             </div>
-
-            <div className="space-y-8  z-50 px-4 py-6 hover:text-white">
+            <div className="space-y-8 z-40 px-4 py-6 hover:text-white">
               {navigation.pages.map((page) => (
                 <div key={page.name} className="flow-root">
                   <a
@@ -77,7 +85,7 @@ export default function Example({
         </div>
       </Dialog>
 
-      <header className={`z-50  ${borderColor} `}>
+      <header className={`z-40 ${borderColor} `}>
         <nav className="mx-auto w-auto mr-0 ml-0 lg:mr-24 lg:ml-2 px-4 sm:px-6 lg:px-7">
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center space-x-4 mr-auto ">
@@ -100,7 +108,7 @@ export default function Example({
                 </Link>
               </div>
 
-              <div className="hidden lg:flex gap-10 z-50 ">
+              <div className="hidden lg:flex gap-10 z-40 ">
                 {navigation.pages.map((page) => (
                   <Link
                     key={page.name}
@@ -122,11 +130,21 @@ export default function Example({
                 <UserIcon className="h-7 w-7" aria-hidden="true" />
               </Link>
 
-              <Link href="#" className={`${textColor} hover:text-gray-500`}>
+              <button
+                onClick={() => setCartOpen(true)}
+                className={`${textColor} hover:text-gray-500 relative`}
+              >
                 <span className="sr-only">Koszyk</span>
                 <ShoppingBagIcon className="h-7 w-7" aria-hidden="true" />
-              </Link>
+
+                {/* Zawsze wyświetl liczbę produktów w koszyku, nawet jeśli wynosi 0 */}
+                <span className="absolute top-1 left-7 rounded-full bg-white-500 text-xs w-5 h-5 flex items-center justify-center">
+                  {getCartItemCount() > 0 ? getCartItemCount() : 0}
+                </span>
+              </button>
               <ModeToggle />
+
+              <Cart open={cartOpen} setOpen={setCartOpen} />
             </div>
           </div>
         </nav>

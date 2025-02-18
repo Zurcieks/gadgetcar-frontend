@@ -1,6 +1,8 @@
 import { Link, StarIcon } from "lucide-react";
 import { Product } from "../../../../types/product.types";
 import { useState } from "react";
+import { CartItem } from "../../../../redux/cartSlice";
+import { useAddItemMutation } from "../../../../redux/cartApi";
 
 interface ProductInfoProps {
   product: Product;
@@ -13,6 +15,32 @@ interface ProductInfoProps {
 
 export function ProductInfo({ product, reviews }: ProductInfoProps) {
   const [quantity, setQuantity] = useState(1);
+  const [addItem] = useAddItemMutation();  // Hook do dodawania przedmiotu do koszyka
+
+  // Funkcja do obsługi dodawania do koszyka
+  const handleAddToCart = () => {
+    const cartItem: CartItem = {
+      productId: product._id,
+      name: product.name,
+      description: product.description,
+      price: product.price,
+      quantity,
+      images: product.images,
+      availability: product.availability,
+      category: product.category,
+    };
+
+    // Wywołanie mutacji do dodania produktu
+    addItem(cartItem)
+      .unwrap()
+      .then(() => {
+        console.log("Produkt został dodany do koszyka");
+      })
+      .catch((err: string) => {
+        console.error("Błąd podczas dodawania produktu do koszyka:", err);
+      });
+  };
+  
   return (
     <div className="flex flex-col gap-6">
       <div>
@@ -62,6 +90,7 @@ export function ProductInfo({ product, reviews }: ProductInfoProps) {
         </div>
 
         <button
+        onClick={handleAddToCart}
           type="button"
           className="w-1/2 rounded-md bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
         >
