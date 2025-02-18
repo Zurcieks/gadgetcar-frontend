@@ -284,14 +284,19 @@ export const useResetPassword = () => {
 }
 
 export const useVerifyAccount = () => {
-  const [status, setStatus] = useState<string | null>(null); 
+  const [status, setStatus] = useState<string | null>(null);
+  const [isClient, setIsClient] = useState(false); // Zmienna, która sprawdzi, czy jesteśmy po stronie klienta
   const searchParams = useSearchParams();
   const token = searchParams.get('token');
-  
+
   useEffect(() => {
-    if (token) {
+    setIsClient(true); // Ustawienie flagi po stronie klienta
+  }, []);
+
+  useEffect(() => {
+    if (isClient && token) {
       axiosInstance
-        .get(`/auth/verify`, { params: { token} })   
+        .get(`/auth/verify`, { params: { token } })
         .then((response) => {
           setStatus("Konto zostało pomyślnie potwierdzone. Możesz powrócić do strony logowania.");
         })
@@ -299,10 +304,10 @@ export const useVerifyAccount = () => {
           setStatus("Błąd weryfikacji konta. Użytkownik może być już potwierdzony.");
         });
     }
-  }, [token]);  
+  }, [isClient, token]);
+
   return {
     status,
-    searchParams,
     token
-  }
+  };
 }
