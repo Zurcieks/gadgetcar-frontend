@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 
 import axiosInstance from "../../../../api/axiosInstance";
 import DropzoneComponent from "./Dropzone";
+import Image from "next/image";
 
 const AddProduct: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -155,10 +156,12 @@ const AddProduct: React.FC = () => {
             <div className="mt-4 grid grid-cols-3 gap-4">
               {formData.images.map((file, index) => (
                 <div key={index} className="relative">
-                  <img
+                  <Image
                     src={URL.createObjectURL(file)}
                     alt={`Preview ${index}`}
                     className="w-full h-32 object-cover rounded"
+                    width={500}
+                    height={500}
                   />
                   <button
                     type="button"

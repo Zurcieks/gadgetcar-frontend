@@ -12,6 +12,7 @@ import Link from "next/link";
 import { ModeToggle } from "./mode-toggle";
 import Cart from "./Cart";
 import { useGetCartQuery } from "../../redux/cartApi";
+import Image from "next/image";
 
 const navigation = {
   pages: [
@@ -100,10 +101,12 @@ export default function Navbar({
 
               <div>
                 <Link href="/">
-                  <img
+                  <Image
                     alt="Logo"
                     src={logoSrc}
                     className="h-40 w-40 mr-auto cursor-pointer"
+                    width={500}
+                    height={500}
                   />
                 </Link>
               </div>
