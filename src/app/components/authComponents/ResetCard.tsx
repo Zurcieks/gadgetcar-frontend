@@ -11,6 +11,7 @@ import { Input } from "@/app/components/ui/input";
 import { Label } from "@/app/components/ui/label";
 import { Tabs, TabsContent } from "@/app/components/ui/tabs";
 import { useResetPassword } from "@/hooks/useAuthForm";
+import { Suspense } from "react";
 
 export function ResetCard() {
   const {
@@ -22,8 +23,8 @@ export function ResetCard() {
   } = useResetPassword();
 
   return (
+    <Suspense>
     <Tabs defaultValue="password" className="w-[400px]">
- 
 
       <TabsContent value="password">
         <Card className="  ">
@@ -84,5 +85,6 @@ export function ResetCard() {
         </Card>
       </TabsContent>
     </Tabs>
+    </Suspense>
   );
 }
