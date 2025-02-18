@@ -5,8 +5,6 @@ import { ThemeProvider } from "next-themes";
 import { Provider } from "react-redux";
 import { Toaster } from "@/app/components/ui/toaster";
 import store from "../redux/store";
-import { useEffect, useState } from "react";
-import { LoadingSpinner } from "./components/LoadingSpinner";
 
 export default function RootLayout({
   children,

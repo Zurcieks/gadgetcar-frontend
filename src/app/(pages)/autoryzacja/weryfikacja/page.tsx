@@ -1,5 +1,5 @@
 "use client"
-import { VerifyAccount } from "@/hooks/authForm";
+import { useVerifyAccount } from "@/hooks/useAuthForm";
 import React from "react";
  
  
@@ -7,7 +7,7 @@ import React from "react";
 const ConfirmPage: React.FC = () => {
   const {
     status
-  } = VerifyAccount();
+  } = useVerifyAccount();
 
   return (
     <div className="h-screen flex items-center justify-center bg-white">

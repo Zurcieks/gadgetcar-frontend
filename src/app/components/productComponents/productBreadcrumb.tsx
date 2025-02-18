@@ -10,7 +10,7 @@ export function ProductBreadcrumb({product}: ProductBreadCrumbProps) {
         <nav className="flex mt-5" aria-label="Breadcrumb">
             <ol className="flex items-center space-x-4">
                 <li>
-                    <Link href="/product" className="text-sm   font-medium">
+                    <Link href="/produkty" className="text-sm   font-medium">
                         Produkty
                     </Link>
                 </li>

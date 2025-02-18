@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 
 import {
   Card,
@@ -11,14 +11,50 @@ import {
 } from "@/app/components/ui/card";
 
 import Image from "next/image";
-import { Product } from "../../../../types/product.types";
+ 
 import { Button } from "../ui/button";
 import {  ShoppingCartIcon } from "lucide-react";
 import { Badge } from "@/app/components/ui/badge";
+import { useDispatch } from "react-redux";
+import { useAddItemMutation } from "@/redux/cartApi";
+import { addItem, CartItem } from "../../../redux/cartSlice";
+import { toast } from "@/hooks/use-toast";
+import { Product } from "../../../../types/product.types";
 interface ProductCardProps {
   product: Product;
 }
 export default function ProductCard({ product }: ProductCardProps) {
+  const [quantity, setQuantity] = useState(1);
+  const dispatch = useDispatch(); 
+  const [addItemMutation] = useAddItemMutation(); 
+  
+
+  const handleAddToCart = async () => {
+    const cartItem: CartItem = {
+      productId: product._id,
+      name: product.name,
+      description: product.description,
+      price: product.price,
+      quantity,
+      images: product.images,
+      availability: product.availability,
+      category: product.category,
+    };
+
+    try {
+      await addItemMutation(cartItem).unwrap();
+      dispatch(addItem(cartItem));
+      toast({
+        variant: "success",
+        title: "Sukces!",
+        description: "Przedmiot został dodany do koszyka.",
+      });
+    } catch (error) {
+      console.error("Error adding item to cart:", error);
+    }
+
+ 
+  };
     
   return (
     <Card key={product._id} className="p-0 flex flex-col justify-between">
@@ -44,9 +80,9 @@ export default function ProductCard({ product }: ProductCardProps) {
         <p className="text-xl font-bold">{product.price} zł</p>
         <CardDescription>{product.description.slice(0, 80)}</CardDescription>
       </CardContent>
-      <CardFooter className="flex">
-        <Button>
-          <ShoppingCartIcon className="size-4 " />
+      <CardFooter className="flex" >
+        <Button  onClick={handleAddToCart} className="flex-1">
+          <ShoppingCartIcon className="size-4 "/>
           Dodaj do koszyka
         </Button>
       </CardFooter>

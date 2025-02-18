@@ -10,10 +10,10 @@ import {
 import { Label } from "../ui/label";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
-import { requestResetPassword } from "@/hooks/authForm";
+import { useRequestResetPassword } from "@/hooks/useAuthForm";
 
 export function RequestCard() {
-  const { handleSubmit, email, setEmail } = requestResetPassword();
+  const { handleSubmit, email, setEmail } = useRequestResetPassword();
 
   return (
     <Tabs defaultValue="account" className="flex  w-[400px] h-96 mx-auto mt-12">

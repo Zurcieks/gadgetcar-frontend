@@ -3,7 +3,7 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/app/components/ui/button";
 import { Input } from "@/app/components/ui/input";
 import { Label } from "@/app/components/ui/label";
-import { useLoginForm } from "@/hooks/authForm";
+import { useLoginForm } from "@/hooks/useAuthForm";
 import Message from "@/app/components/authComponents/message";
 import { Checkbox } from "./ui/checkbox";
 

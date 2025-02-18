@@ -6,8 +6,9 @@ import {
   DialogTitle,
 } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
-import { useClearCartMutation, useGetCartQuery, useRemoveItemMutation } from "../../redux/cartApi";
-import { Types } from "mongoose";
+import {useGetCartQuery, useRemoveItemMutation } from "../../redux/cartApi";
+import Link from "next/link";
+import Image from "next/image";
  
 interface CartProps {
   open: boolean;
@@ -21,12 +22,9 @@ export default function Cart({ open, setOpen }: CartProps) {
 
   const handleRemoveItem = async (productId: string) => {
     try {
-      console.log("📤 Wysyłam request do usunięcia:", { productId });
-  
       const result = await removeItem({ productId }).unwrap();
-      console.log("🛒 Odpowiedź z API:", result);
     } catch (error) {
-      console.error("❌ Błąd podczas usuwania:", error);
+      console.error("Błąd podczas usuwania", error);
     }
   };
   
@@ -80,10 +78,12 @@ export default function Cart({ open, setOpen }: CartProps) {
                           cart?.items.map((item) => (
                             <li key={item.productId} className="flex py-6">
                               <div className="size-24 shrink-0 overflow-hidden rounded-md border border-gray-200">
-                                <img
+                              <Image
                                   alt={item.name}
                                   src={`http://localhost:5000/${item.images[0]}`}
-                                  className="size-full object-cover"
+                                  className=" "
+                                  width={1000}
+                                  height={1000}
                                 />
                               </div>
 
@@ -91,9 +91,9 @@ export default function Cart({ open, setOpen }: CartProps) {
                                 <div>
                                   <div className="flex justify-between text-base font-medium text-gray-900">
                                     <h3>
-                                      <a href={`/produkty/${item.productId}`}>
+                                      <Link href={`/produkty/${item.productId}`}>
                                         {item.name}
-                                      </a>
+                                      </Link>
                                     </h3>
                                     <p className="ml-4">{item.price} zł</p>
                                   </div>

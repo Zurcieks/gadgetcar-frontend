@@ -5,7 +5,6 @@ import { useToast } from "./use-toast";
 
 export const useUserForm = () => {
   const { toast } = useToast();
-  const [user, setUser] = useState<User | null>(null);
   const [formData, setFormData] = useState<User | null>(null);
   const [isEditing, setIsEditing] = useState(false);
  
@@ -14,7 +13,6 @@ export const useUserForm = () => {
     const fetchUser = async () => {
       try {
         const response = await axiosInstance.get("/user/id");
-        setUser(response.data);
         setFormData(response.data);
       } catch (error) {
         console.error("Error fetching user data:", error);
@@ -33,7 +31,6 @@ export const useUserForm = () => {
     try {
       if (formData) {
         const response = await axiosInstance.put(`/user`, formData);
-        setUser(formData);
         setIsEditing(false);
 
         if (response.status === 200) {
@@ -54,7 +51,7 @@ export const useUserForm = () => {
       console.log("Error updating user data:", error);
 
       toast({
-        variant: "destructive", // Toast w czerwonym kolorze
+        variant: "destructive", 
         title: "Błąd!",
         description: "Wystąpił problem podczas zapisywania danych.",
       });

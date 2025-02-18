@@ -159,7 +159,7 @@ export const useRegisterForm = () => {
   };
 };
 
-export const requestResetPassword = () => {
+export const useRequestResetPassword = () => {
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState<string | null>(null);
 
@@ -211,7 +211,7 @@ export const requestResetPassword = () => {
   };
 };
 
-export const ResetPassword = () => {
+export const useResetPassword = () => {
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [message, setMessage] = useState<string | null>(null);
@@ -282,7 +282,7 @@ export const ResetPassword = () => {
   }
 }
 
-export const VerifyAccount = () => {
+export const useVerifyAccount = () => {
   const [status, setStatus] = useState<string | null>(null); 
   const searchParams = useSearchParams();
   const token = searchParams.get('token');

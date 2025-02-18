@@ -1,10 +1,10 @@
 "use client"
-import { getProducts } from "@/hooks/useProduct";
+import { useProducts } from "@/hooks/useProduct";
 import Link from "next/link";
 
  
-export default function Example() {
-  const { products } = getProducts();
+export default function HomeProducts() {
+  const { products } = useProducts();
   return (
     <div className="">
       <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">

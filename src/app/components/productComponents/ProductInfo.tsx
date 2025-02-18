@@ -4,7 +4,7 @@ import { useState } from "react";
 import { CartItem } from "../../../redux/cartSlice";
 import { useAddItemMutation } from "../../../redux/cartApi";
 import { useDispatch } from "react-redux";
-import { addItem } from "../../../redux/cartSlice"; // Importuj akcję Redux
+import { addItem } from "../../../redux/cartSlice"; 
 import { toast } from "@/hooks/use-toast";
 
 interface ProductInfoProps {
@@ -18,8 +18,8 @@ interface ProductInfoProps {
 
 export function ProductInfo({ product, reviews }: ProductInfoProps) {
   const [quantity, setQuantity] = useState(1);
-  const dispatch = useDispatch(); // Dodaj dispatch do obsługi Redux
-  const [addItemMutation] = useAddItemMutation(); // Hook do dodawania przedmiotu do koszyka
+  const dispatch = useDispatch();
+  const [addItemMutation] = useAddItemMutation(); 
 
   const handleAddToCart = async () => {
     const cartItem: CartItem = {

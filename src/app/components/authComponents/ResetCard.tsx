@@ -10,7 +10,7 @@ import {
 import { Input } from "@/app/components/ui/input";
 import { Label } from "@/app/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/app/components/ui/tabs";
-import { ResetPassword } from "@/hooks/authForm";
+import { useResetPassword } from "@/hooks/useAuthForm";
 
 export function ResetCard() {
   const {
@@ -22,7 +22,7 @@ export function ResetCard() {
     error,
     setError,
     message,
-  } = ResetPassword();
+  } = useResetPassword();
 
   return (
     <Tabs defaultValue="password" className="w-[400px]">

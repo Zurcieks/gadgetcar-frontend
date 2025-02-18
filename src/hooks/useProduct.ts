@@ -4,7 +4,7 @@ import axiosInstance from "../../api/axiosInstance";
 import { Product } from "../../types/product.types";
  
 
-export function getProducts() {
+export function useProducts() {
     const [products, setProducts] = useState<Product[]>([]);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState<Error | null>(null);
@@ -27,7 +27,7 @@ export function getProducts() {
     return { products, isLoading, error };
 }
 
-export function getProductById(productId: string) {
+export function useProductById(productId: string) {
     const [product, setProduct] = useState<Product | null>(null);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState<Error | null>(null);
