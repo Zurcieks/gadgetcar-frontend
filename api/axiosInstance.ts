@@ -4,7 +4,7 @@ let isRefreshing = false;
 let refreshSubscribers: Array<() => void> = []; // ⬅️ Ustawienie poprawnego typu
 
 const axiosInstance = axios.create({
-  baseURL: "http://localhost:5000",
+  baseURL: "https://d174-89-78-215-133.ngrok-free.app",
   headers: {
     "Content-Type": "application/json",
   },
