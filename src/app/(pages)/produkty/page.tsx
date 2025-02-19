@@ -4,7 +4,6 @@ import { useProducts } from "@/hooks/useProduct";
 import { useProductFilters } from "@/hooks/useProductFilters";
 import ProductFilter from "@/app/components/productComponents/products-filter";
 import ProductCard from "@/app/components/productComponents/product-card";
-import Link from "next/link";
 
 export default function ProductsPage() {
   const { products, isLoading, error } = useProducts();

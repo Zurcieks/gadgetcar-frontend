@@ -1,7 +1,6 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 import axiosInstance from '../../api/axiosInstance';
 import { AddItemDto } from './dto/AddItemDto';
-import { UpdateItemDto } from './dto/UpdateItemDto';
 import { RemoveItemDto } from './dto/RemoveItemDto';
 import axios from 'axios';
 import { Cart } from '../../types/cart.types';
