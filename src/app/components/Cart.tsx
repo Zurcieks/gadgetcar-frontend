@@ -24,10 +24,12 @@ export default function Cart({ open, setOpen }: CartProps) {
   const { data} = useGetCartQuery();
   const [removeItem] = useRemoveItemMutation();
  
+ 
   useEffect(() => {
     if (data) {
       dispatch(setCartItems(data.items));
     }
+ 
   }, [data, dispatch]);
 
   const handleRemoveItem = async (productId: string) => {

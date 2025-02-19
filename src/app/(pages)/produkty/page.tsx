@@ -5,18 +5,16 @@ import { useProductFilters } from "@/hooks/useProductFilters";
 import ProductFilter from "@/app/components/productComponents/products-filter";
 import ProductCard from "@/app/components/productComponents/product-card";
 import Link from "next/link";
- 
+
 export default function ProductsPage() {
- 
   const { products, isLoading, error } = useProducts();
- 
+
   const [filters, setFilters] = useState({
     searchQuery: "",
     category: "",
     priceRange: { min: 0, max: 1000 },
   });
 
- 
   const filteredProducts = useProductFilters(products, filters);
   const handleSearchChange = (value: string) => {
     setFilters((prev) => ({ ...prev, searchQuery: value }));
@@ -30,7 +28,7 @@ export default function ProductsPage() {
     setFilters((prev) => ({ ...prev, priceRange: { min, max } }));
   };
 
-  if (isLoading) return ;
+  if (isLoading) return;
   if (error) return <div>Error: {error.message}</div>;
 
   return (
@@ -46,9 +44,7 @@ export default function ProductsPage() {
       />
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
         {filteredProducts.map((product) => (
-          <Link key={product._id} href={`/produkty/${product._id}`} className="transition-transform duration-200 hover:scale-[1.02]">
-            <ProductCard key={product._id} product={product} />
-          </Link>
+          <ProductCard key={product._id} product={product} />
         ))}
       </div>
     </main>

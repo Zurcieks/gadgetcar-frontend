@@ -6,7 +6,7 @@ import { useRole } from "../../../hooks/useRole";
 
 const navigationLinks = [
   { href: "#details", label: "Dane osobowe", primary: true },
-  { href: "#address", label: "Metody płatności" },
+  { href: "#adresy", label: "Adresy" },
   { href: "#orders", label: "Zamówienia" },
   { href: "#settings", label: "Ustawienia" },
 ];
@@ -40,18 +40,12 @@ const Sidebar: React.FC = () => {
         ))}
 
         {isAdmin && (
-          <Link
-            href="/admin"
-            className="block   hover:text-blue-600"
-          >
+          <Link href="/admin" className="block   hover:text-blue-600">
             Admin
           </Link>
         )}
 
-        <button
-          onClick={onLogout}
-          className="block  hover:text-blue-600"
-        >
+        <button onClick={onLogout} className="block  hover:text-blue-600">
           Wyloguj
         </button>
       </nav>
