@@ -4,7 +4,7 @@ import {
   Carousel,
   CarouselContent,
   CarouselItem,
-} from "@/components/ui/carousel";
+} from "@/app/components/ui/carousel";
 
 interface ProductGalleryProps {
   images: string[];

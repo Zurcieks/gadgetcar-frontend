@@ -12,7 +12,6 @@ export interface CartItem {
   category: "Akcesoria" | "Radia";
 }
 
-
 interface CartState {
   items: CartItem[];
 }
@@ -50,14 +49,14 @@ const cartSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addMatcher(cartApi.endpoints.getCart.matchFulfilled,
-      (state, {payload}) => {
+    builder.addMatcher(
+      cartApi.endpoints.getCart.matchFulfilled,
+      (state, { payload }) => {
         state.items = payload.items;
       }
-    )
+    );
   }
 });
 
 export const { setCartItems, addItem, updateItem, removeItem, clearCart } = cartSlice.actions;
-
 export default cartSlice.reducer;

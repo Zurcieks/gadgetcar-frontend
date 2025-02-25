@@ -56,7 +56,23 @@ export const useLoginForm = () => {
 
     try {
       const response = await axiosInstance.post("/auth/login", formData);
+
       if (response.status === 200 || response.status === 201) {
+        const anonymousId = sessionStorage.getItem("anonymousId");
+        console.log('Anonymous ID before merge:', anonymousId);
+        
+      if (anonymousId) {
+        try {
+          await axiosInstance.post("/cart/merge", {
+            anonymousUserId: anonymousId,
+          });
+          console.log('Cart merged successfully');
+          sessionStorage.removeItem("anonymousId");
+        } catch (mergeError) {
+          console.error('Cart merge failed:', mergeError);
+        }
+      }
+
         router.push("/konto");
       }
     } catch (error: any) {
@@ -279,8 +295,6 @@ export const useResetPassword = () => {
     router,
     useSearchParams,
     token,
-    handleSubmit
-  }
-}
-
- 
+    handleSubmit,
+  };
+};

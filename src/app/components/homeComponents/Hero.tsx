@@ -32,7 +32,7 @@ const Hero = () => {
         </p>
         <Link
           className=" flex  border-2 text-white border-white px-4 py-3 bg-transparent rounded-md"
-          href="/sklep"
+          href="/produkty"
         >
           Przeglądaj
         </Link>

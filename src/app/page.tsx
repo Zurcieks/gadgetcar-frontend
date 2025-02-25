@@ -5,6 +5,7 @@ import Features from "./components/homeComponents/Features";
 import Products from "./components/homeComponents/Products";
 import Footer from "./components/Footer";
 import Faq from "./components/Faq";
+ 
 
 const Page = () => {
   return (

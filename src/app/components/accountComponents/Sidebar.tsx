@@ -6,9 +6,7 @@ import { useRole } from "../../../hooks/useRole";
 
 const navigationLinks = [
   { href: "#details", label: "Dane osobowe", primary: true },
-  { href: "#adresy", label: "Adresy" },
   { href: "#orders", label: "Zamówienia" },
-  { href: "#settings", label: "Ustawienia" },
 ];
 
 const Sidebar: React.FC = () => {

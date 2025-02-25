@@ -31,14 +31,14 @@ export default function ProductFilter(props: ProductFilterProps) {
 
   return (
     <div className="flex flex-col sm:flex-row gap-4 sm:w-full sm:gap-4">
-      {/* Search input */}
+ 
       <Input
         placeholder="Szukaj"
         onChange={(e) => onSearchChange(e.target.value)}
         className="w-full sm:w-full"
       />
       
-      {/* Category selector */}
+ 
       <Select 
         value={selectedCategory === "" ? "all" : selectedCategory} 
         onValueChange={(value) => onCategoryChange(value === "all" ? "" : value)}
@@ -53,7 +53,7 @@ export default function ProductFilter(props: ProductFilterProps) {
         </SelectContent>
       </Select>
 
-      {/* Price range inputs */}
+ 
       <div className="flex flex-col sm:flex-row gap-2 sm:items-center sm:w-auto">
         <Input
           type="number"
